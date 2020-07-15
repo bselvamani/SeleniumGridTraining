@@ -1,0 +1,52 @@
+group 'SeleniumGridTraining'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+configurations {
+    cucumberRuntime {
+        extendsFrom testRuntime
+    }
+}
+
+dependencies {
+    // Commons
+    compile group: 'commons-io', name: 'commons-io', version: '2.6'
+
+
+    // Selenium
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-remote-driver', version: '3.141.59'
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-chrome-driver', version: '3.141.59'
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-firefox-driver', version: '3.141.59'
+
+    // TestNG
+    testCompile group: 'org.testng', name: 'testng', version: '6.14.3'
+
+    // Cucumber
+    compile group: 'io.cucumber', name: 'cucumber-java', version: '4.8.0'
+    compile group: 'io.cucumber', name: 'cucumber-testng', version: '4.8.0'
+
+    // LOG
+    compile group: 'log4j', name: 'log4j', version: '1.2.17'
+
+    // Extent Reports
+    compile group: 'com.aventstack', name: 'extentreports', version: '4.1.5'
+}
+
+task testNGTest(type: Test) {
+    systemProperty 'grid', System.getProperties().getOrDefault('grid', 'remote')
+    systemProperty 'browser', System.getProperties().getOrDefault('browser', 'chrome')
+    systemProperty 'headless', System.getProperties().getOrDefault('headless', 'false')
+
+    useTestNG() {
+        useDefaultListeners = true
+        suites 'src/test/resources/testng.xml'
+    }
+}

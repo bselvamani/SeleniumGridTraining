@@ -1,0 +1,7 @@
+#!/bin/sh
+
+clear
+echo "Starting Selenium Node ..."
+
+cd $1
+java -Dwebdriver.chrome.driver=node/chromedriver -Dwebdriver.gecko.driver=node/geckodriver -jar selenium-server-standalone-3.141.59.jar -role node -nodeConfig node/selenium-node.json

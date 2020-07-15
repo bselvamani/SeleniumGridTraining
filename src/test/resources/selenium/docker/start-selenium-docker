@@ -1,0 +1,7 @@
+#!/bin/sh
+
+clear
+echo "Starting Selenium Docker Image ..."
+
+cd $1
+docker-compose up -d

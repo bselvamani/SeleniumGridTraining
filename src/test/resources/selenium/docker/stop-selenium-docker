@@ -1,0 +1,7 @@
+#!/bin/sh
+
+clear
+echo "Closing Selenium Docker Image ..."
+
+cd $1
+docker-compose down
